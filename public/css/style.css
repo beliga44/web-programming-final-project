@@ -1,0 +1,27 @@
+/** {*/
+    /*border-left-color: white !important;*/
+/*}*/
+/**:after {*/
+    /*content: none !important;*/
+/*}*/
+
+/**:before {*/
+    /*content: none !important;*/
+/*}*/
+
+.top-bar {
+    border-top: 3px solid #F48024 !important;
+    box-shadow: 0 1px 0 rgba(12,13,14,0.1),0 1px 6px rgba(59,64,69,0.1) !important;
+}
+
+.no-pseudo-before:before {
+    content: none !important;
+}
+
+.no-pseudo-after:after {
+    content: none !important;
+}
+
+.remove-border-left {
+    border-left-color: white !important;
+}
