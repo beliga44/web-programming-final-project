@@ -3,7 +3,14 @@ $(document).ready(function() {
      * Show sign-up modal
      */
     $('.sign-up').click(function () {
-       $('.ui.modal').modal('show');
+        $('.ui.modal.sign-up-form').modal('show');
+    });
+
+    /**
+     * Show log-in modal
+     */
+    $('.log-in').click(function() {
+        $('.ui.modal.log-in-form').modal('show');
     });
 
     /**

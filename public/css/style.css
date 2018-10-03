@@ -25,3 +25,11 @@
 .remove-border-left {
     border-left-color: white !important;
 }
+
+.main.container {
+	margin-top: 7em !important;
+}
+
+.weight-600 {
+	font-weight: 600;
+}
