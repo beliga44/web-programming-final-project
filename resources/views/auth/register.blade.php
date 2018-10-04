@@ -1,11 +1,84 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="ui container sign-up-form">
-    <div class="header">
-        Sign Up to Div Forum
+<div class="ui middle aligned grid bg-white">
+    <div class="ui container bg-white mt-content mb-content">
+        <div class="header">
+            <strong><p class="weight-600 style-motto">Join and Get New Experience in Div Forum</p></strong>
+        </div>   
+        <div class="ui divider"></div>
+        <form class="ui form two column grid">
+            <div class="column">
+                <div class="required field">
+                    <label>Name</label>
+                    <input type="text" name="name" placeholder="Name">
+                </div>
+                <div class="required field">
+                    <label>Email Address</label>
+                    <input type="text" name="email" placeholder="Email Address">
+                </div>
+                <div class="two fields">
+                    <div class="required field">
+                        <label>Password</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="required field">
+                        <label>Confirm Password</label>
+                        <input type="password" name="password-confirmation">
+                    </div>
+                </div>
+                <div class="required field">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone-number" placeholder="Phone Number">
+                </div>
+            </div>
+            <div class="column">
+                <div class="required field">
+                    <label>Address</label>
+                    <input type="text" name="address" placeholder="Address">
+                </div>
+                <div class="required field">
+                    <label>Birthday</label>
+                    <input type="date" name="email" placeholder="Birthday">
+                </div>
+                <div class="fields">
+                    <div class="required field">
+                        <label>Gender</label>
+                        <div class="inline fields">
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input name="gender" checked="true" tabindex="0" class="hidden" type="radio">
+                                    <label>Male</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input name="gender" tabindex="0" class="hidden" type="radio">
+                                    <label>Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="required field">
+                    <label>Photo</label>
+                    <input type="file" name="profile_picture">
+                </div>
+            </div>
+        </form>
+        <div class="ui left aligned mt-content">
+            <div class="ui checkbox">
+                <input name="agreement" type="checkbox">
+                <label>By registering to this website. I agree term and condition</label>
+            </div>
+        </div>
+        <div class="ui left aligned mt-content">
+            <button class="ui large primary button">
+                Submit to Join Us !
+            </button>
+        </div>
     </div>
-    <div class="content">
+    <!-- <div class="content">
         <form action="" class="ui form">
             <div class="ui two column grid">
                 <div class="column">
@@ -76,7 +149,7 @@
             Sign Up
             <i class="checkmark icon"></i>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- <div class="container">

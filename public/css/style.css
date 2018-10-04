@@ -9,6 +9,10 @@
     /*content: none !important;*/
 /*}*/
 
+body {
+    background: #f5eeee66;
+}
+
 .top-bar {
     border-top: 3px solid #F48024 !important;
     box-shadow: 0 1px 0 rgba(12,13,14,0.1),0 1px 6px rgba(59,64,69,0.1) !important;
@@ -32,4 +36,21 @@
 
 .weight-600 {
 	font-weight: 600;
+}
+
+.bg-white {
+    background: white;
+}
+
+.style-motto {
+    font-size: 23px; 
+    color: rgba(14, 151, 188, 0.9);
+}
+
+.mt-content {
+    margin-top: 1.2em;
+}
+
+.mb-content {
+    margin-bottom: 1.3em;
 }

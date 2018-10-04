@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="ui middle aligned center aligned grid" style="background: whitesmoke">
+<div class="ui middle aligned center aligned grid bg-white">
     <div class="seven wide column">
         <div class="column">
             <img class="ui fluid rounded image" src="{{asset('img/Optimized-log-in.jpg')}}">
@@ -10,7 +10,7 @@
     <div class="five wide column">
         <div class="column">
             <div class="ui left aligned container">
-                <strong><p style="font-size: 23px; color: rgba(14, 151, 188, 0.9);" class="weight-600">Make New Friend with Div Forum</p></strong>
+                <strong><p class="weight-600 style-motto">Make New Friend with Div Forum</p></strong>
             </div>
             <form action="{{ route('login') }}" method="POST" class="ui small form container">
                 {{ csrf_field() }}
@@ -46,7 +46,7 @@
         </div>
         <div class="ui divider"></div>
         <div class="column">
-            <p class="weight-600">Don't have any account ? <a href="">Sign up</a> here !</p>
+            <p class="weight-600">Don't have any account ? <a href="{{ url('/register') }}" >Sign up</a> here !</p>
         </div>
     </div>
 </div>
