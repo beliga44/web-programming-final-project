@@ -21,8 +21,12 @@
                     <img class="ui tiny image" src="{{asset("img/logo.png")}}">
                 </a>
                 <div class="right menu">
-                    <a href="{{ url('/login') }}" class="item no-pseudo-before log-in">Log In</a>
-                    <a href="{{ url('/register') }}" class="item no-pseudo-before sign-up">Sign Up</a>
+                    @if (!Auth::user())
+                        <a href="{{ url('/login') }}" class="item no-pseudo-before log-in">Log In</a>
+                        <a href="{{ url('/register') }}" class="item no-pseudo-before sign-up">Sign Up</a>
+                    @else
+                        <a href="{{ route('logout') }}" class="item no-pseudo-before log-in">Log Out</a>
+                    @endif
                 </div>
             </div>
         </header>

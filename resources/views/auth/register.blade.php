@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="ui middle aligned grid bg-white">
     <div class="ui container bg-white mt-content mb-content">
@@ -7,112 +6,71 @@
             <strong><p class="weight-600 style-motto">Join and Get New Experience in Div Forum</p></strong>
         </div>   
         <div class="ui divider"></div>
-        <form class="ui form two column grid">
-            <div class="column">
-                <div class="required field">
-                    <label>Name</label>
-                    <input type="text" name="name" placeholder="Name">
-                </div>
-                <div class="required field">
-                    <label>Email Address</label>
-                    <input type="text" name="email" placeholder="Email Address">
-                </div>
-                <div class="two fields">
-                    <div class="required field">
-                        <label>Password</label>
-                        <input type="password" name="password">
-                    </div>
-                    <div class="required field">
-                        <label>Confirm Password</label>
-                        <input type="password" name="password-confirmation">
-                    </div>
-                </div>
-                <div class="required field">
-                    <label>Phone Number</label>
-                    <input type="text" name="phone-number" placeholder="Phone Number">
-                </div>
-            </div>
-            <div class="column">
-                <div class="required field">
-                    <label>Address</label>
-                    <input type="text" name="address" placeholder="Address">
-                </div>
-                <div class="required field">
-                    <label>Birthday</label>
-                    <input type="date" name="email" placeholder="Birthday">
-                </div>
-                <div class="fields">
-                    <div class="required field">
-                        <label>Gender</label>
-                        <div class="inline fields">
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input name="gender" checked="true" tabindex="0" class="hidden" type="radio">
-                                    <label>Male</label>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui radio checkbox">
-                                    <input name="gender" tabindex="0" class="hidden" type="radio">
-                                    <label>Female</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="required field">
-                    <label>Photo</label>
-                    <input type="file" name="profile_picture">
-                </div>
-            </div>
-        </form>
-        <div class="ui left aligned mt-content">
-            <div class="ui checkbox">
-                <input name="agreement" type="checkbox">
-                <label>By registering to this website. I agree term and condition</label>
-            </div>
-        </div>
-        <div class="ui left aligned mt-content">
-            <button class="ui large primary button">
-                Submit to Join Us !
-            </button>
-        </div>
-    </div>
-    <!-- <div class="content">
-        <form action="" class="ui form">
-            <div class="ui two column grid">
+        <form class="ui form" action="{{ url('/register') }}" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="two column grid">
                 <div class="column">
-                    <div class="required field">
+                    <div class="required field {{ $errors->has('name') ? 'error' : '' }}">
                         <label>Name</label>
                         <input type="text" name="name" placeholder="Name">
+                        @if ($errors->has('name'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('name') }}
+                            </div>
+                        @endif
                     </div>
-                    <div class="required field">
+                    <div class="required field {{ $errors->has('email') ? 'error' : '' }}">
                         <label>Email Address</label>
                         <input type="text" name="email" placeholder="Email Address">
+                        @if ($errors->has('email'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('email') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="two fields">
-                        <div class="required field">
+                        <div class="required field {{ $errors->has('password') ? 'error' : '' }}">
                             <label>Password</label>
                             <input type="password" name="password">
+                            @if ($errors->has('password'))
+                                <div class="ui pointing red basic label">
+                                    {{ $errors->first('password') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="required field">
                             <label>Confirm Password</label>
-                            <input type="password" name="password-confirmation">
+                            <input type="password" name="password_confirmation">
                         </div>
                     </div>
-                    <div class="required field">
+                    <div class="required field {{ $errors->has('phone_number') ? 'error' : '' }}">
                         <label>Phone Number</label>
-                        <input type="text" name="phone-number" placeholder="Phone Number">
+                        <input type="text" name="phone_number" placeholder="Phone Number">
+                        @if ($errors->has('phone_number'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('phone_number') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="column">
-                    <div class="required field">
+                    <div class="required field {{ $errors->has('address') ? 'error' : '' }}">
                         <label>Address</label>
-                        <textarea name="address" id="" cols="30" rows="1"></textarea>
+                        <input type="text" name="address" placeholder="Address">
+                        @if ($errors->has('address'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('address') }}
+                            </div>
+                        @endif
                     </div>
-                    <div class="required field">
+                    <div class="required field {{ $errors->has('dob') ? 'error' : '' }}">
                         <label>Birthday</label>
-                        <input type="date" name="email" placeholder="Birthday">
+                        <input type="date" name="dob" placeholder="Birthday">
+                        @if ($errors->has('dob'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('dob') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="fields">
                         <div class="required field">
@@ -120,109 +78,49 @@
                             <div class="inline fields">
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        <input name="gender" checked="true" tabindex="0" class="hidden" type="radio">
+                                        <input name="gender" checked="checked" type="radio" value="1">
                                         <label>Male</label>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        <input name="gender" tabindex="0" class="hidden" type="radio">
+                                        <input name="gender" type="radio" value="0">
                                         <label>Female</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="required field">
+                    <div class="required field {{ $errors->has('profile_picture') ? 'error' : '' }}">
                         <label>Photo</label>
-                        <input type="file" name="photo">
+                        <input type="file" name="profile_picture">
+                        @if ($errors->has('profile_picture'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('profile_picture') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="actions">
-        <div class="ui tiny red black deny button">
-            Cancel
-        </div>
-        <div class="ui tiny positive right labeled icon button">
-            Sign Up
-            <i class="checkmark icon"></i>
-        </div>
-    </div> -->
-</div>
-
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+            <div class="ui left aligned mt-content form {{ $errors->has('agreement') ? 'error' : '' }}">
+                <div class="ui checkbox">
+                    <input name="agreement" type="checkbox" class="error">
+                    <label>By registering to this website. I agree term and condition</label>
+                </div>
+                <div class="ui error message">
+                    <div class="header">Oops! There's something wrong </div>
+                    @if ($errors->has('agreement'))
+                        <p>{{ $errors->first('agreement') }}</p>
+                    @endif
+                    
                 </div>
             </div>
-        </div>
+            <div class="ui left aligned mt-content">
+                <button type="submit" class="ui large primary button" name="submit">
+                    Submit to Join Us !
+                </button>
+            </div>
+        </form>
     </div>
-</div> -->
+</div>
 @endsection

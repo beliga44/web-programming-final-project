@@ -16,5 +16,5 @@ $(document).ready(function() {
     /**
      * Change checkbox value for gender
      */
-    $('.ui.radio.checkbox').checkbox();
+    // $('.ui.radio.checkbox').checkbox();
 });
