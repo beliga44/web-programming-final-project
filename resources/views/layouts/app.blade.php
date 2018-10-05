@@ -17,15 +17,21 @@
     <body>
         <header class="ui top fixed small menu top-bar">
             <div class="ui container middle aligned">
-                <a href="{{ url('/') }}" class="item no-pseudo-before remove-border-left">
+                <a href="{{ route('home') }}" class="item no-pseudo-before remove-border-left">
                     <img class="ui tiny image" src="{{asset("img/logo.png")}}">
                 </a>
+                <div class="item">
+                    <form class="ui middle aligned icon input">
+                        <i class="search link icon"></i>
+                        <input placeholder="Search..." type="text">
+                    </form>
+                </div>
                 <div class="right menu">
                     @if (!Auth::user())
-                        <a href="{{ url('/login') }}" class="item no-pseudo-before log-in">Log In</a>
-                        <a href="{{ url('/register') }}" class="item no-pseudo-before sign-up">Sign Up</a>
+                        <a href="{{ url('/login') }}" class="item no-pseudo-before">Log In</a>
+                        <a href="{{ url('/register') }}" class="item no-pseudo-before">Sign Up</a>
                     @else
-                        <a href="{{ route('logout') }}" class="item no-pseudo-before log-in">Log Out</a>
+                        <a href="{{ route('logout') }}" class="item no-pseudo-before">Log Out</a>
                     @endif
                 </div>
             </div>
