@@ -7,23 +7,23 @@
 
         <title>Forlob</title>
 
-        <link rel="stylesheet" href="{{asset("semantic/dist/semantic.min.css")}}">
-        <link rel="stylesheet" href="{{asset("css/style.css")}}">
+        <link rel="stylesheet" href="{{ asset("semantic/dist/semantic.min.css") }}">
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}">
 
-        <script src="{{asset("js/jquery-3.3.1.min.js")}}"></script>
-        <script src="{{asset("semantic/dist/semantic.min.js")}}"></script>
-        <script src="{{asset("js/main.js")}}"></script>
+        <script src="{{ asset("js/jquery-3.3.1.min.js") }}"></script>
+        <script src="{{ asset("semantic/dist/semantic.min.js") }}"></script>
+        <script src="{{ asset("js/main.js") }}"></script>
     </head>
     <body>
         <header class="ui top fixed small menu top-bar">
             <div class="ui container middle aligned">
                 <a href="{{ route('home') }}" class="item no-pseudo-before remove-border-left">
-                    <img class="ui tiny image" src="{{asset("img/logo.png")}}">
+                    <img class="ui tiny image" src="{{ asset("img/logo.png") }}">
                 </a>
                 <div class="item">
-                    <form class="ui middle aligned icon input">
-                        <i class="search link icon"></i>
-                        <input placeholder="Search..." type="text">
+                    <form class="ui middle aligned icon input search-bar" data-content="Press &quot;Enter&quot; to search" action="{{ route('home') }}">
+                        <i class="ui icon search"></i>
+                        <input placeholder="Search..." type="text" name="keyword">
                     </form>
                 </div>
                 <div class="right menu">
@@ -31,7 +31,19 @@
                         <a href="{{ url('/login') }}" class="item no-pseudo-before">Log In</a>
                         <a href="{{ url('/register') }}" class="item no-pseudo-before">Sign Up</a>
                     @else
-                        <a href="{{ route('logout') }}" class="item no-pseudo-before">Log Out</a>
+                        <div class="ui floating dropdown item no-pseudo-before profile">
+                            <img class="ui avatar image" src="{{ asset('profile_picture/' . Auth::user()->profile_picture) }}">
+                            <span>{{ Auth::user()->name }}</span>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="item">
+                                    <a href="{{ route('profile') }}">Profile</a>
+                                </div>
+                                <div class="item">
+                                    <a href="{{ route('logout') }}">Logout</a>
+                                </div>
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>

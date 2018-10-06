@@ -20,3 +20,6 @@ Route::post('/login');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('profile', function () {
+   return view('profile');
+})->name('profile');

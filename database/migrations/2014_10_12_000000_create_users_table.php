@@ -19,9 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('address');
+            $table->string('phone_number');
             $table->string('profile_picture');
             $table->date('dob');
-            $table->tinyInteger('gender');
+            $table->tinyInteger('gender')->comment('0 = Female, 1 = Male');
             $table->boolean('is_admin');
             $table->softDeletes();
             $table->rememberToken();
