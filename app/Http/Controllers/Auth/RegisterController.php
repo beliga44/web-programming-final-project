@@ -92,8 +92,7 @@ class RegisterController extends Controller
      */
     public static function setImageName($extension)
     {
-        $imageName = time() . '.' . $extension;
-        return $imageName;
+        return time() . '.' . $extension;
     }
 
     /**

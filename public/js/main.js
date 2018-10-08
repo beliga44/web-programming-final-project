@@ -23,4 +23,6 @@ $(document).ready(function() {
     $('.dropdown.profile').dropdown({
         on: 'hover'
     });
+
+    $('.popup-icon').popup();
 });

@@ -54,3 +54,8 @@ body {
 .mb-content {
     margin-bottom: 1.3em;
 }
+
+.profile-name {
+    font-size: 26px;
+    font-weight: 600;
+}
