@@ -36,12 +36,8 @@
                             <span>{{ Auth::user()->name }}</span>
                             <i class="dropdown icon"></i>
                             <div class="menu">
-                                <div class="item">
-                                    <a href="{{ route('profile') }}">Profile</a>
-                                </div>
-                                <div class="item">
-                                    <a href="{{ route('logout') }}">Logout</a>
-                                </div>
+                                <a class="item" href="{{ route('profile') }}">Profile</a>
+                                <a class="item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>
                     @endif

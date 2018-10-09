@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Rules\EndsWith;
+use App\Http\Requests\StoreRegisterUser;
+use Illuminate\Auth\Events\Registered;
+use App\Services\RegisterUserService;
 
 class RegisterController extends Controller
 {
@@ -29,15 +32,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
+    protected $registerUserService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RegisterUserService $registerUserService)
     {
         $this->middleware('guest');
+        $this->registerUserService = $registerUserService;
     }
 
     /**
@@ -49,15 +54,24 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'phone_number' => 'required|numeric',
-            'address' => ['required', new EndsWith('Street')],
-            'profile_picture' => 'required|image|mimes:jpeg,png,jpg',
-            'dob' => 'required|before:12 years ago',
-            'agreement' => 'accepted'
+            // Check on App\Http\Requests
         ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  App\Http\Requests\StoreRegisterUser  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function register(StoreRegisterUser $request) 
+    {
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 
     /**
@@ -68,43 +82,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $imageName = RegisterController::setImageName($data['profile_picture']->getClientOriginalExtension());
-        RegisterController::moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
-
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'address' => $data['address'],
-            'profile_picture' => $imageName,
-            'phone_number' => $data['phone_number'],
-            'dob' => $data['dob'],
-            'gender' => $data['gender'],
-            'is_admin' => 0
-        ]);
+        return $this->registerUserService->make($data);
     }
 
-    /**
-     * Set new image name by the time
-     *
-     * @param string $extension
-     * @return string
-     */
-    public static function setImageName($extension)
-    {
-        return time() . '.' . $extension;
-    }
-
-    /**
-     * Move specified file to specified path
-     *
-     * @param array $file
-     * @param string $path
-     * @param string $imageName
-     * @return void
-     */
-    public static function moveFile($file, $path, $imageName)
-    {
-        $file->move($path, $imageName);
-    }
 }

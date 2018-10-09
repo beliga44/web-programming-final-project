@@ -77,13 +77,13 @@
 		                            <div class="inline fields">
 		                                <div class="field">
 		                                    <div class="ui radio checkbox">
-		                                        <input name="gender" checked="{{ Auth::user()->gender == 1 ? 'checked' : '' }}" type="radio" value="1">
+		                                        <input name="gender" type="radio" value="1" {{ Auth::user()->gender == 1 ? 'checked' : '' }}>
 		                                        <label>Male</label>
 		                                    </div>
 		                                </div>
 		                                <div class="field">
 		                                    <div class="ui radio checkbox">
-		                                        <input name="gender" checked="{{ Auth::user()->gender == 0 ? 'checked' : '' }}" type="radio" value="0">
+		                                        <input name="gender" type="radio" value="0" {{ Auth::user()->gender == 0 ? 'checked' : '' }}>
 		                                        <label>Female</label>
 		                                    </div>
 		                                </div>
