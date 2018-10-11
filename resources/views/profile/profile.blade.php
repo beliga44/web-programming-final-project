@@ -4,10 +4,10 @@
 	<div class="ui grid">
 		<div class="four wide column">
 			<div class="ui vertical fluid tabular menu">
-				<a class="active item" href="{{ route('profile') }}">
+				<a class="active item" href="{{ route('profile.show') }}">
 					Bio
 				</a>
-				<a class="item" href="{{ route('profile/edit') }}">
+				<a class="item" href="{{ route('profile.show.update') }}">
 					Edit Profile
 				</a>
 				<a class="item">

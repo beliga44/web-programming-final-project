@@ -4,10 +4,10 @@
 	<div class="ui grid">
 		<div class="four wide column">
 			<div class="ui vertical fluid tabular menu">
-				<a class="item" href="{{ route('profile') }}">
+				<a class="item" href="{{ route('profile.show') }}">
 					Bio
 				</a>
-				<a class="active item" href="{{ route('profile/edit') }}">
+				<a class="active item" href="{{ route('profile.show.update') }}">
 					Edit Profile
 				</a>
 				<a class="item">
@@ -20,7 +20,7 @@
 		</div>
 	  	<div class="twelve wide stretched column">
 	    	<div class="ui segment">
-	    		<form class="ui form" action="{{ url('/register') }}" method="POST" enctype="multipart/form-data">
+	    		<form class="ui form" action="{{ url('profile/' . Auth::user()->id . '/update') }}" method="POST" enctype="multipart/form-data">
 		            {{ csrf_field() }}
 		            <div class="two column grid">
 		                <div class="column">
@@ -30,15 +30,6 @@
 		                        @if ($errors->has('name'))
 		                            <div class="ui pointing red basic label">
 		                                {{ $errors->first('name') }}
-		                            </div>
-		                        @endif
-		                    </div>
-		                    <div class="required field {{ $errors->has('email') ? 'error' : '' }}">
-		                        <label>Email Address</label>
-		                        <input type="text" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
-		                        @if ($errors->has('email'))
-		                            <div class="ui pointing red basic label">
-		                                {{ $errors->first('email') }}
 		                            </div>
 		                        @endif
 		                    </div>
@@ -92,13 +83,13 @@
 		                    </div>
 		                    <div class="required field {{ $errors->has('profile_picture') ? 'error' : '' }}">
 		                        <label>Photo</label>
-		                        <input type="file" name="profile_picture">
-		                        @if ($errors->has('profile_picture'))
-		                            <div class="ui pointing red basic label">
-		                                {{ $errors->first('profile_picture') }}
-		                            </div>
-		                        @endif
-		                    </div>
+								<input type="file" name="profile_picture">
+								@if ($errors->has('profile_picture'))
+									<div class="ui pointing red basic label">
+										{{ $errors->first('profile_picture') }}
+									</div>
+								@endif
+							</div>
 		                </div>
 		            </div>
 		            <div class="ui left aligned mt-content">

@@ -22,11 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('profile')->group(function () {
-	Route::get('/', function () {
-   		return view('profile.profile');
-	})->name('profile');
-
-	Route::get('profile/edit', function () {
-	   	return view('profile.edit');
-	})->name('profile/edit');	
+	Route::get('/', 'ProfileController@show')->name('profile.show');
+	Route::get('update', 'ProfileController@edit')->name('profile.show.update');
+	Route::post('{user}/update', 'ProfileController@update')->name('profile.update');
 });

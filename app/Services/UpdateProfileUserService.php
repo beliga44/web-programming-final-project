@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\User;
 
-class RegisterUserService 
+class UpdateProfileUserService 
 {
     
     /**
@@ -14,23 +14,32 @@ class RegisterUserService
      * @param string $imageName
      * @return string
      */
-	public function make(array $data) 
+	public function make(array $data, $user) 
 	{
-	 	$imageName = $this->setImageName($this->getExtension($data['profile_picture']));
-        $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
+        $imageName;
 
-		return User::create([
-			'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'address' => $data['address'],
-            'profile_picture' => $imageName,
+        if ($this->isNewPhotoUploaded($data)) 
+        {
+            $imageName = $this->setImageName($this->getExtension($data['profile_picture']));
+            $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
+        } else
+            $imageName = $user->profile_picture;
+        
+        $user->update([
+            'name' => $data['name'],
             'phone_number' => $data['phone_number'],
+            'address' => $data['address'],
             'dob' => $data['dob'],
             'gender' => $data['gender'],
-            'is_admin' => 0
-		]);
-	}
+            'profile_picture' => $imageName,
+        ]);
+
+    }
+    
+    public function isNewPhotoUploaded($data)
+    {
+        return array_key_exists('profile_picture', $data);
+    }
 
     /**
      * Set new image name with current time
