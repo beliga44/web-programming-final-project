@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Services\UpdateProfileUserService;
+use App\Service\Requests\ChangePassword;
 use App\User;
 
 class ProfileController extends Controller
@@ -66,6 +67,17 @@ class ProfileController extends Controller
     }
 
     /**
+     * Display the change password form.
+     *
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function showChangePasswordForm() 
+    {
+        return view('profile.password');
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -83,6 +95,19 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProfile $request)
+    {
+        $this->updateProfileUserService->make($request->all(), Auth::user());
+
+        return redirect()->route('profile.show.update');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  App\Http\Requests\UpdateProfilet  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(ChangePassword $request)
     {
         $this->updateProfileUserService->make($request->all(), Auth::user());
 

@@ -10,11 +10,11 @@
 				<a class="item" href="{{ route('profile.show.update') }}">
 					Edit Profile
 				</a>
-				<a class="item">
-					Inbox
+				<a class="item" href="{{ route('profile.show.password') }}">
+					Change Password
 				</a>
 				<a class="item">
-					Links
+					Inbox
 				</a>
 			</div>
 		</div>

@@ -10,11 +10,11 @@
 				<a class="active item" href="{{ route('profile.show.update') }}">
 					Edit Profile
 				</a>
-				<a class="item">
-					Inbox
+				<a class="item" href="{{ route('profile.show.password') }}">
+					Change Password
 				</a>
 				<a class="item">
-					Links
+					Inbox
 				</a>
 			</div>
 		</div>
@@ -32,7 +32,16 @@
 		                                {{ $errors->first('name') }}
 		                            </div>
 		                        @endif
-		                    </div>
+							</div>
+							<div class="required field {{ $errors->has('email') ? 'error' : '' }}">
+								<label>Email Address</label>
+								<input type="text" name="email" placeholder="Email Address" value="{{ Auth::user()->email }}">
+								@if ($errors->has('email'))
+									<div class="ui pointing red basic label">
+										{{ $errors->first('email') }}
+									</div>
+								@endif
+							</div>
 		                    <div class="required field {{ $errors->has('phone_number') ? 'error' : '' }}">
 		                        <label>Phone Number</label>
 		                        <input type="text" name="phone_number" placeholder="Phone Number" value="{{ Auth::user()->phone_number }}">
@@ -42,8 +51,6 @@
 		                            </div>
 		                        @endif
 		                    </div>
-		                </div>
-		                <div class="column">
 		                    <div class="required field {{ $errors->has('address') ? 'error' : '' }}">
 		                        <label>Address</label>
 		                        <input type="text" name="address" placeholder="Address" value="{{ Auth::user()->address }}">

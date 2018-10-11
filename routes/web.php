@@ -24,5 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('profile')->group(function () {
 	Route::get('/', 'ProfileController@show')->name('profile.show');
 	Route::get('update', 'ProfileController@edit')->name('profile.show.update');
+	Route::get('password', 'ProfileController@showChangePasswordForm')->name('profile.show.password');
 	Route::post('{user}/update', 'ProfileController@update')->name('profile.update');
+	Route::post('{user}/password', 'ProfileController@changePassword')->name('profile.password');
 });
