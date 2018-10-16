@@ -4,36 +4,21 @@ namespace App\Services;
 
 use App\User;
 
-class UpdateProfileUserService 
+class UpdateUserPasswordService 
 {
     
-    /**
-     * Update profile for specified user
+        /**
+     * Update password for specified user
      *
      * @param array  $data
      * @param App\User  $user
      * @return string
      */
-	public function update(array $data, $user) 
-	{
-        $imageName;
-
-        if ($this->isNewPhotoUploaded($data)) {
-            $imageName = $this->getImageName($data['profile_picture']);
-            $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
-        } else
-            $imageName = $user->profile_picture;
-        
+    public function update(array $data, $user) 
+    {
         $user->update([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone_number' => $data['phone_number'],
-            'address' => $data['address'],
-            'dob' => $data['dob'],
-            'gender' => $data['gender'],
-            'profile_picture' => $imageName,
+            'password' => bcrypt($data['new_password'])
         ]);
-
     }
     
     /**
@@ -55,7 +40,7 @@ class UpdateProfileUserService
      */
     public function getExtension($file)
     {
-    	return $file->getClientOriginalExtension();
+        return $file->getClientOriginalExtension();
     }
 
     /**

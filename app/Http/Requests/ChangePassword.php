@@ -26,8 +26,9 @@ class ChangePassword extends FormRequest
     public function rules()
     {
         return [
-            'old_password' => ['required|string|min:6', new ComparePassword(Auth::user()->password)],
-            'new_password' => 'required|string|min:6|confirmed|different:old_password',
+            'old_password' => ['required', 'string', 'min:6', new ComparePassword(Auth::user()->password)],
+            'new_password' => 'required|string|min:6|different:old_password',
+            'password_confirmation' => 'required_with:new_password|same:new_password'
         ];
     }
 }

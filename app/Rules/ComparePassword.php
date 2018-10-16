@@ -28,7 +28,7 @@ class ComparePassword implements Rule
      */
     public function passes($attribute, $value)
     {
-        return Hash::check($value, $currentPassword);
+        return Hash::check($value, $this->currentPassword);
     }
 
     /**
@@ -38,6 +38,6 @@ class ComparePassword implements Rule
      */
     public function message()
     {
-        return 'password does not match with current password.';
+        return 'Old password does not match with current password.';
     }
 }

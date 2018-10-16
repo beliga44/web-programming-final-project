@@ -5,23 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
+use App\Http\Requests\ChangePassword;
 use App\Services\UpdateProfileUserService;
-use App\Service\Requests\ChangePassword;
+use App\Services\UpdateUserPasswordService;
 use App\User;
 
 class ProfileController extends Controller
 {
 
     private $updateProfileUserService;
+    private $updateUserPasswordService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UpdateProfileUserService $updateProfileUserService) 
+    public function __construct(UpdateProfileUserService $updateProfileUserService,
+                                UpdateUserPasswordService $updateUserPasswordService) 
     {
         $this->updateProfileUserService = $updateProfileUserService;
+        $this->updateUserPasswordService = $updateUserPasswordService;
     }
 
     /**
@@ -96,20 +100,20 @@ class ProfileController extends Controller
      */
     public function update(UpdateProfile $request)
     {
-        $this->updateProfileUserService->make($request->all(), Auth::user());
+        $this->updateProfileUserService->update($request->all(), Auth::user());
 
         return redirect()->route('profile.show.update');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified password in storage.
      *
      * @param  App\Http\Requests\UpdateProfilet  $request
      * @return \Illuminate\Http\Response
      */
     public function changePassword(ChangePassword $request)
     {
-        $this->updateProfileUserService->make($request->all(), Auth::user());
+        $this->updateUserPasswordService->update($request->all(), Auth::user());
 
         return redirect()->route('profile.show.update');
     }
