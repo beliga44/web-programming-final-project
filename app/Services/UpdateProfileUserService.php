@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\User;
+use App\Services\Interfaces\UploadableInterface;
+use App\Services\Interfaces\HandleableUploadInterface;
 
-class UpdateProfileUserService 
+class UpdateProfileUserService implements UploadableInterface, HandleableUploadInterface
 {
-    
     /**
      * Update profile for specified user
      *
@@ -39,12 +40,12 @@ class UpdateProfileUserService
     /**
      * Check if there is uploaded photo
      *
-     * @param array  $data
+     * @param array  $file
      * @return boolean
      */
-    public function isNewPhotoUploaded($data)
+    public function hasUploadNewFile($file)
     {
-        return array_key_exists('profile_picture', $data);
+        return array_key_exists('profile_picture', $file);
     }
 
     /**
@@ -64,7 +65,7 @@ class UpdateProfileUserService
      * @param string  $extension
      * @return string
      */
-    public function getImageName($file)
+    public function getImageName($extension)
     {
         return time() . '.' . $this->getExtension($file);
     }

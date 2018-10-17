@@ -6,7 +6,6 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Rules\EndsWith;
 use App\Http\Requests\StoreRegisterUser;
 use Illuminate\Auth\Events\Registered;
 use App\Services\RegisterUserService;

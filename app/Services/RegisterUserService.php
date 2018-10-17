@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\User;
+use App\Services\Interfaces\HandleableUploadInterface;
 
-class RegisterUserService 
+class RegisterUserService implements HandleableUploadInterface
 {
-    
     /**
      * Create new user
      *
@@ -16,7 +16,7 @@ class RegisterUserService
      */
 	public function make(array $data) 
 	{
-	 	$imageName = $this->setImageName($this->getExtension($data['profile_picture']));
+	 	$imageName = $this->getImageName($this->getExtension($data['profile_picture']));
         $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
 
 		return User::create([
@@ -33,23 +33,23 @@ class RegisterUserService
 	}
 
     /**
-     * Set new image name with current time
+     * Get file extension
      *
-     * @param string $extension
+     * @param string $file
      * @return string
      */
-    public function getExtension($data)
+    public function getExtension($file)
     {
-    	return $data->getClientOriginalExtension();
+    	return $file->getClientOriginalExtension();
     }
 
     /**
-     * Set new image name with current time
+     * Get new image name with current time
      *
      * @param string $extension
      * @return string
      */
-    public function setImageName($extension)
+    public function getImageName($extension)
     {
         return time() . '.' . $extension;
     }
