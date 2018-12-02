@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class StartsWith implements Rule
 {
-    private var $prefix;
+    private $prefix;
 
     /**
      * Create a new rule instance.
@@ -27,7 +27,7 @@ class StartsWith implements Rule
      */
     public function passes($attribute, $value)
     {
-        return substr($valute, 0, strlen($this->prefix) - 1) === $this->prefix;
+        return substr($value, 0, strlen($this->prefix) - 1) === $this->prefix;
     }
 
     /**

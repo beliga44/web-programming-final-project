@@ -11,7 +11,6 @@ class RegisterUserService implements HandleableUploadInterface
      * Create new user
      *
      * @param array $data
-     * @param string $imageName
      * @return string
      */
 	public function make(array $data) 
