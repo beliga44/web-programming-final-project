@@ -59,3 +59,8 @@ body {
     font-size: 26px;
     font-weight: 600;
 }
+
+.form-list-padding {
+    padding-left: 60px;
+    padding-right: 60px;
+}

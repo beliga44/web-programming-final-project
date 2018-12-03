@@ -117,7 +117,7 @@
             </div>
             <div class="ui left aligned mt-content">
                 <button type="submit" class="ui large primary button" name="submit">
-                    Submit to Join Us !
+                    Join Us !
                 </button>
             </div>
         </form>

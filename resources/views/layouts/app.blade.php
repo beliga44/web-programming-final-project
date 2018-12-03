@@ -23,7 +23,7 @@
                 <div class="item">
                     <form class="ui middle aligned icon input search-bar" data-content="Press &quot;Enter&quot; to search" action="{{ route('home') }}">
                         <i class="ui icon search"></i>
-                        <input placeholder="Search..." type="text" name="keyword">
+                        <input placeholder="Search Title or Category" type="text" name="keyword">
                     </form>
                 </div>
                 <div class="right menu">
