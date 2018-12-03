@@ -88,7 +88,7 @@
 		                            </div>
 		                        </div>
 		                    </div>
-		                    <div class="required field {{ $errors->has('profile_picture') ? 'error' : '' }}">
+		                    <div class="field {{ $errors->has('profile_picture') ? 'error' : '' }}">
 		                        <label>Photo</label>
 								<input type="file" name="profile_picture">
 								@if ($errors->has('profile_picture'))

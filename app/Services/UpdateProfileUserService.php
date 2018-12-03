@@ -17,14 +17,15 @@ class UpdateProfileUserService implements UploadableInterface, HandleableUploadI
      */
 	public function update(array $data, $user) 
 	{
-        $imageName;
+        $imageName = null;
 
-        if ($this->isNewPhotoUploaded($data)) {
-            $imageName = $this->getImageName($data['profile_picture']);
+        if ($this->hasUploadNewFile($data)) {
+            $imageName = $this->getImageName($this->getExtension($data['profile_picture']));
             $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
-        } else
+        } else {
             $imageName = $user->profile_picture;
-        
+        }
+
         $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -56,7 +57,7 @@ class UpdateProfileUserService implements UploadableInterface, HandleableUploadI
      */
     public function getExtension($file)
     {
-    	return $file->getClientOriginalExtension();
+        return $file->getClientOriginalExtension();
     }
 
     /**
@@ -67,7 +68,7 @@ class UpdateProfileUserService implements UploadableInterface, HandleableUploadI
      */
     public function getImageName($extension)
     {
-        return time() . '.' . $this->getExtension($file);
+        return time() . '.' . $extension;
     }
 
     /**
