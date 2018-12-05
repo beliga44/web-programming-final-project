@@ -4,18 +4,20 @@
 	<div class="ui grid">
 		<div class="four wide column">
 			<div class="ui vertical fluid tabular menu">
-				<a class="item" href="{{ route('profile.show') }}">
+				<a class="item" href="{{ route('profile.show', ['id' => $user->id]) }}">
 					Bio
 				</a>
-				<a class="active item" href="{{ route('profile.show.update') }}">
+				@can('profile-edit', $user)
+				<a class="active item" href="{{ route('profile.show.update', ['id' => $user->id]) }}">
 					Edit Profile
 				</a>
-				<a class="item" href="{{ route('profile.show.password') }}">
+				<a class="item" href="{{ route('profile.show.password', ['id' => $user->id]) }}">
 					Change Password
 				</a>
 				<a class="item">
 					Inbox
 				</a>
+				@endcan
 			</div>
 		</div>
 	  	<div class="twelve wide stretched column">

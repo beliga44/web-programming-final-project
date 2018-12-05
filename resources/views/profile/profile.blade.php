@@ -8,10 +8,10 @@
 					Bio
 				</a>
 				@can('profile-edit', $user)
-				<a class="item" href="{{ route('profile.show.update') }}">
+				<a class="item" href="{{ route('profile.show.update', ['id' => $user->id]) }}">
 					Edit Profile
 				</a>
-				<a class="item" href="{{ route('profile.show.password') }}">
+				<a class="item" href="{{ route('profile.show.password', ['id' => $user->id]) }}">
 					Change Password
 				</a>
 				<a class="item">
@@ -41,14 +41,16 @@
 								<i class="mail icon"></i>
 								1
 							</a>
-							<a class="ui green image label popup-icon" data-content="Positive popularity">
+						@cannot('profile-popularity', $user)
+							<a class="ui green image label popup-icon" data-content="Positive popularity" href="{{ route('profile.popularity', ['id' => $user->id, 'popularity' => 'positive']) }}">
 							    <i class="plus icon"></i>
-							    4
+							    {{ $user->positive_popularity }}
 							</a>
-							<a class="ui red image label popup-icon" data-content="Negative popularity">
+							<a class="ui red image label popup-icon" data-content="Negative popularity" href="{{ route('profile.popularity', ['id' => $user->id, 'popularity' => 'negative']) }}">
 							    <i class="minus icon"></i>
-							    4
+								{{ $user->negative_popularity }}
 							</a>
+						@endcannot
 	      				</div>
 	      			</div>
 	      			<div class="row justify aligned">

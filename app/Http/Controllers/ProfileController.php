@@ -78,9 +78,11 @@ class ProfileController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function showChangePasswordForm() 
+    public function showChangePasswordForm($id)
     {
-        return view('profile.password');
+        $user = User::find($id);
+
+        return view('profile.password', ['user' => $user]);
     }
 
     /**
@@ -89,9 +91,11 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('profile.update', ['user' => Auth::user()]);
+        $user = User::find($id);
+
+        return view('profile.update', ['user' => $user]);
     }
 
     /**
@@ -104,7 +108,7 @@ class ProfileController extends Controller
     {
         $this->updateProfileUserService->update($request->all(), Auth::user());
 
-        return redirect()->route('profile.show.update');
+        return redirect()->route('profile.show.update', ['id' => Auth::id()]);
     }
 
     /**
@@ -117,7 +121,7 @@ class ProfileController extends Controller
     {
         $this->updateUserPasswordService->update($request->all(), Auth::user());
 
-        return redirect()->route('profile.show.update');
+        return redirect()->route('profile.show.update', ['id' => Auth::id()]);
     }
 
     /**
@@ -129,5 +133,19 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function increasePopularity($id, $state)
+    {
+        $user = User::find($id);
+
+        if ($state == 'positive') {
+            $user->positive_popularity += 1;
+        } else{
+            $user->negative_popularity += 1;
+        }
+        $user->save();
+
+        return redirect()->route('profile.show', ['id' => $id]);
     }
 }

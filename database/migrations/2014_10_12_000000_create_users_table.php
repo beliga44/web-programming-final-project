@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone_number');
             $table->string('profile_picture');
+            $table->integer('positive_popularity')->default(0);
+            $table->integer('negative_popularity')->default(0);
             $table->date('dob');
             $table->tinyInteger('gender')->comment('0 = Female, 1 = Male');
             $table->boolean('is_admin');
