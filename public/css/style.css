@@ -64,3 +64,7 @@ body {
     padding-left: 60px;
     padding-right: 60px;
 }
+
+.thread-title-flex {
+    display: flex;
+}

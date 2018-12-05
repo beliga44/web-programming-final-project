@@ -36,7 +36,7 @@
                             <span>{{ Auth::user()->name }}</span>
                             <i class="dropdown icon"></i>
                             <div class="menu">
-                                <a class="item" href="{{ route('profile.show') }}">Profile</a>
+                                <a class="item" href="{{ route('profile.show', ['id' => Auth::user()->id]) }}">Profile</a>
                                 <a class="item" href="{{ route('logout') }}">Logout</a>
                             </div>
                         </div>

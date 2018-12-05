@@ -11,18 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
 Route::post('/login');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::prefix('profile')->group(function () {
-	Route::get('/', 'ProfileController@show')->name('profile.show');
+	Route::get('/{user}', 'ProfileController@show')->name('profile.show');
 	Route::get('update', 'ProfileController@edit')->name('profile.show.update');
 	Route::get('password', 'ProfileController@showChangePasswordForm')->name('profile.show.password');
 	Route::post('{user}/update', 'ProfileController@update')->name('profile.update');

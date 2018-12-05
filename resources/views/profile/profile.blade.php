@@ -4,9 +4,10 @@
 	<div class="ui grid">
 		<div class="four wide column">
 			<div class="ui vertical fluid tabular menu">
-				<a class="active item" href="{{ route('profile.show') }}">
+				<a class="active item" href="{{ route('profile.show', ['id' => $user->id]) }}">
 					Bio
 				</a>
+				@can('profile-edit', $user)
 				<a class="item" href="{{ route('profile.show.update') }}">
 					Edit Profile
 				</a>
@@ -16,17 +17,18 @@
 				<a class="item">
 					Inbox
 				</a>
+				@endcan
 			</div>
 		</div>
 	  	<div class="twelve wide stretched column">
 	    	<div class="ui segment">
 	    		<div class="ui">
-	      			<img class="ui small circular image centered" src="{{ asset('profile_picture/' . Auth::user()->profile_picture) }}">
+	      			<img class="ui small circular image centered" src="{{ asset('profile_picture/' . $user->profile_picture) }}">
 	      		</div>
 	      		<div class="ui two column centered grid">
 	      			<div class="row justify aligned">
 	      				<div class="column justify aligned">
-	      					<p class="profile-name"> {{ Auth::user()->name }} </p>
+	      					<p class="profile-name"> {{ $user->name }} </p>
 	      				</div>
 	      			</div>
 	      			<div class="row justify aligned">
