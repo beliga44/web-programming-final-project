@@ -61,6 +61,7 @@
 	      			</div>
 				</div>
 	  		</div>
+			@can('profile-inbox', $user)
 			<div class="ui segments">
 				<div class="ui segment">
 					<p><strong>Send Something to {{ $user->name }}</strong></p>
@@ -87,6 +88,7 @@
 					</div>
 				</form>
 			</div>
+			@endcan
 	  	</div>
 	</div>
 @endsection

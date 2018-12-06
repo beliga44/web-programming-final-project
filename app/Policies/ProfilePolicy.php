@@ -36,4 +36,13 @@ class ProfilePolicy
     public function popularity($user, $view_user) {
         return $user->id != $view_user->id;
     }
+
+    /**
+     * Can send message when return false
+     *
+     * @return boolean
+     */
+    public function inbox($user, $view_user) {
+        return $user->id != $view_user->id;
+    }
 }
