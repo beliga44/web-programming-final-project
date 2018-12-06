@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\StoreRegisterUser;
 use Illuminate\Auth\Events\Registered;
-use App\Services\RegisterUserService;
 
 class RegisterController extends Controller
 {
@@ -31,17 +30,17 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/';
-    protected $registerUserService;
+    protected $userService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(RegisterUserService $registerUserService)
+    public function __construct(UserService $userService)
     {
         $this->middleware('guest');
-        $this->registerUserService = $registerUserService;
+        $this->userService = $userService;
     }
 
     /**
@@ -81,7 +80,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return $this->registerUserService->make($data);
+        return $this->userService->make($data);
     }
 
 }

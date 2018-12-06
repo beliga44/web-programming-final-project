@@ -14,7 +14,7 @@
 				<a class="item" href="{{ route('profile.show.password', ['id' => $user->id]) }}">
 					Change Password
 				</a>
-				<a class="item">
+				<a class="item" href="{{ route('inbox.show', ['id' => $user->id]) }}">
 					Inbox
 				</a>
 				@endcan

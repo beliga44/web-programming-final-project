@@ -2,30 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\ChangePassword;
-use App\Services\UpdateProfileUserService;
-use App\Services\UpdateUserPasswordService;
-use App\User;
 
 class ProfileController extends Controller
 {
 
     private $updateProfileUserService;
     private $updateUserPasswordService;
+    private $userService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(UpdateProfileUserService $updateProfileUserService,
-                                UpdateUserPasswordService $updateUserPasswordService) 
+    public function __construct(UserService $userService)
     {
-        $this->updateProfileUserService = $updateProfileUserService;
-        $this->updateUserPasswordService = $updateUserPasswordService;
+        $this->userService = $userService;
     }
 
     /**
@@ -67,7 +64,7 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = $this->userService->find($id);
 
         return view('profile.profile', ['user' => $user]);
     }
@@ -80,7 +77,7 @@ class ProfileController extends Controller
      */
     public function showChangePasswordForm($id)
     {
-        $user = User::find($id);
+        $user = $this->userService->find($id);
 
         return view('profile.password', ['user' => $user]);
     }
@@ -93,7 +90,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = $this->userService->find($id);
 
         return view('profile.update', ['user' => $user]);
     }
@@ -106,7 +103,7 @@ class ProfileController extends Controller
      */
     public function update(UpdateProfile $request)
     {
-        $this->updateProfileUserService->update($request->all(), Auth::user());
+        $this->userService->update($request->all(), Auth::user());
 
         return redirect()->route('profile.show.update', ['id' => Auth::id()]);
     }
@@ -119,7 +116,7 @@ class ProfileController extends Controller
      */
     public function changePassword(ChangePassword $request)
     {
-        $this->updateUserPasswordService->update($request->all(), Auth::user());
+        $this->userService->updatePassword($request->all(), Auth::user());
 
         return redirect()->route('profile.show.update', ['id' => Auth::id()]);
     }
@@ -135,17 +132,23 @@ class ProfileController extends Controller
         //
     }
 
+    /**
+     * Increase popularity by given state.
+     *
+     * @param  int  $id
+     * @param  string $state
+     * @return \Illuminate\Http\Response
+     */
     public function increasePopularity($id, $state)
     {
-        $user = User::find($id);
-
-        if ($state == 'positive') {
-            $user->positive_popularity += 1;
-        } else{
-            $user->negative_popularity += 1;
-        }
-        $user->save();
+        $user = $this->userService->find($id);
+        $this->userService->increasePopularity($user, $state);
 
         return redirect()->route('profile.show', ['id' => $id]);
+    }
+
+    public function inbox($id)
+    {
+        return view('profile.inbox');
     }
 }

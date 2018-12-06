@@ -68,3 +68,7 @@ body {
 .thread-title-flex {
     display: flex;
 }
+
+ul.pagination > li {
+    display: inline-block;
+}

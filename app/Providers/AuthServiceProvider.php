@@ -27,6 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('profile-edit', 'App\Policies\ProfilePolicy@edit');
-        Gate::define('profile-popularity', 'App\Policies\ProfilePolicy@edit');
+        Gate::define('profile-popularity', 'App\Policies\ProfilePolicy@popularity');
+        Gate::define('profile-inbox', 'App\Policies\ProfilePolicy@inbox');
     }
 }

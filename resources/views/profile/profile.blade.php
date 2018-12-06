@@ -14,7 +14,7 @@
 				<a class="item" href="{{ route('profile.show.password', ['id' => $user->id]) }}">
 					Change Password
 				</a>
-				<a class="item">
+				<a class="item" href="{{ route('inbox.show', ['id' => $user->id]) }}">
 					Inbox
 				</a>
 				@endcan
@@ -41,7 +41,7 @@
 								<i class="mail icon"></i>
 								1
 							</a>
-						@cannot('profile-popularity', $user)
+						@can('profile-popularity', $user)
 							<a class="ui green image label popup-icon" data-content="Positive popularity" href="{{ route('profile.popularity', ['id' => $user->id, 'popularity' => 'positive']) }}">
 							    <i class="plus icon"></i>
 							    {{ $user->positive_popularity }}
@@ -50,7 +50,7 @@
 							    <i class="minus icon"></i>
 								{{ $user->negative_popularity }}
 							</a>
-						@endcannot
+						@endcan
 	      				</div>
 	      			</div>
 	      			<div class="row justify aligned">
@@ -61,6 +61,32 @@
 	      			</div>
 				</div>
 	  		</div>
+			<div class="ui segments">
+				<div class="ui segment">
+					<p><strong>Send Something to {{ $user->name }}</strong></p>
+				</div>
+				<form class="ui form" method="POST" action="{{ route('inbox.send', ['id' => $user->id]) }}">
+					{{ csrf_field() }}
+					<div class="ui segment">
+						<div class="ui form">
+							<div class="field">
+								<textarea rows="2" name="message"></textarea>
+							</div>
+							@if ($errors->has('message'))
+								<div class="ui red message">
+									<p>{{ $errors->first('message') }}</p>
+								</div>
+							@endif
+						</div>
+					</div>
+					<div class="ui right aligned segment">
+						<button type="submit" class="ui primary labeled icon button">
+							<i class="send icon"></i>
+							Send Message
+						</button>
+					</div>
+				</form>
+			</div>
 	  	</div>
 	</div>
 @endsection
