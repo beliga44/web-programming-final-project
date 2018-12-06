@@ -42,7 +42,7 @@ class ProfilePolicy
      *
      * @return boolean
      */
-    public function inbox($user, $view_user) {
+    public function message($user, $view_user) {
         return $user->id != $view_user->id;
     }
 }
