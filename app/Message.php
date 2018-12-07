@@ -10,8 +10,18 @@ class Message extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = ['content', 'receiver_id', 'sender_id'];
 
+    /**
+     * The attributes that are appends to model.
+     *
+     * @var array
+     */
     public $appends = [
         "formatted_date"
     ];

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SendMessage;
-use App\Message;
 use App\Services\MessageService;
-use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
