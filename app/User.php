@@ -30,9 +30,16 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the messages for the user.
+     * Get the messages for every user.
      */
     public function messages() {
         return $this->hasMany('App\Message');
+    }
+
+    /**
+     * Get the threads for every user.
+     */
+    public function threads() {
+        return $this->hasMany('App\Thread');
     }
 }

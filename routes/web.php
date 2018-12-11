@@ -38,3 +38,8 @@ Route::prefix('message')->group(function () {
 
     Route::post('{message_id}/{receiver_id}', 'MessageController@deleteMessage')->name('inbox.delete');
 });
+
+Route::prefix('thread')->group(function () {
+    Route::post('/', 'ThreadController@store')->name('thread.store');
+    Route::get('insert', 'ThreadController@create')->name('thread.create');
+});

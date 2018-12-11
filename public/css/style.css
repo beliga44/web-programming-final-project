@@ -72,3 +72,12 @@ body {
 ul.pagination > li {
     display: inline-block;
 }
+
+.thread-name-text {
+    font-size: 14pt;
+    font-weight: 600;
+}
+
+.thread-status-text {
+    margin-left: 1.3%;
+}

@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageService
 {
-    public function findMessageById($messageId) {
-        return Message::find($messageId);
+    public function findMessageById($id) {
+        return Message::find($id);
     }
 
     public function getMessageByReceiver($receiver_id) {

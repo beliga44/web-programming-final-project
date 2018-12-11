@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Thread;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $users = User::all();
+        $threads = Thread::with(['poster', 'category'])->paginate(5);
 
-        return view('home', ['users' => $users]);
+        return view('home', ['users' => $users, 'threads' => $threads]);
     }
 }

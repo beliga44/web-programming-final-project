@@ -18,7 +18,7 @@ class CreateThreadsTable extends Migration
             $table->string('name');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('poster_id');
-            $table->tinyInteger('isClosed');
+            $table->tinyInteger('is_closed');
             $table->string('description');
             $table->softDeletes();
             $table->timestamps();
