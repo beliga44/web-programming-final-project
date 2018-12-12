@@ -6,10 +6,12 @@
                 {{--<a href="{{ route('profile.show', ['id' => $user->id]) }}">{{ $user->name }}</a>--}}
             {{--</div>--}}
         {{--@endforeach--}}
-        <a class="circular ui primary labeled icon button" href="{{ route('thread.create') }}">
-            <i class="add icon"></i>
-            New Thread
-        </a>
+        @can('create', App\Thread::class)
+            <a class="circular ui primary labeled icon button" href="{{ route('thread.create') }}">
+                <i class="add icon"></i>
+                New Thread
+            </a>
+        @endcan
         @foreach($threads as $thread)
             <div class="ui segments">
                 <div class="ui segment">

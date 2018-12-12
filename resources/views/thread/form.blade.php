@@ -10,6 +10,11 @@
                 <div class="field">
                     <label>Name</label>
                     <input type="text" name="name" placeholder="Name">
+                    @if ($errors->has('name'))
+                        <div class="ui red message">
+                            <p>{{ $errors->first('name') }}</p>
+                        </div>
+                    @endif
                 </div>
                 <div class="field">
                     <label>Category</label>
