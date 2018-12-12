@@ -29,8 +29,10 @@ class MessageController extends Controller
     }
 
     public function deleteMessage($messageId, $receiver_id) {
-        $message = $this->messageService->findMessageById($messageId);
-        $this->messageService->deleteMessage($message);
+        $message = $this->messageService
+            ->findMessageById($messageId);
+        $this->messageService
+            ->deleteMessage($message);
 
         return redirect()->route('inbox.show', ['user_id' => $receiver_id]);
     }

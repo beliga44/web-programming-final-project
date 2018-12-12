@@ -13,12 +13,16 @@ use App\Thread;
 
 class ThreadService
 {
+    public function all() {
+
+    }
+
     public function findThreadById($id) {
         return Thread::find($id);
     }
 
     public function make(array $data, $user) {
-        $data['user_id'] = $user->id;
+        $data['poster_id'] = $user->id;
 
         return Thread::create($data);
     }
