@@ -34,12 +34,11 @@ class UserService
      */
     public function increasePopularity(User $user, $state) {
         if ($state == 'positive') {
-            $user->positive_popularity += 1;
-        } else{
-            $user->negative_popularity += 1;
+            $user->increment('positive_popularity');
+            return;
         }
 
-        $user->save();
+        $user->increment('negative_popularity');
     }
 
     /**

@@ -12,7 +12,9 @@
 */
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+
 Route::post('/login');
+
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -39,10 +41,21 @@ Route::prefix('message')->group(function () {
     Route::post('{message_id}/{receiver_id}', 'MessageController@deleteMessage')->name('inbox.delete');
 });
 
-
 Route::prefix('thread')->group(function () {
     Route::middleware(['auth'])->group(function () {
-        Route::post('/', 'ThreadController@store')->name('thread.store')->middleware('can:create,App\Thread');
+        Route::post('/', 'ThreadController@save')->name('thread.save')->middleware('can:create,App\Thread');
+
+        Route::post('{thread_id}/update', 'ThreadController@update')->name('thread.update')->middleware('can:create,App\Thread');
+
         Route::get('insert', 'ThreadController@create')->name('thread.create');
+
+        Route::get('{thread_id}/update', 'ThreadController@edit')->name('thread.edit');
+
+        Route::get('history', 'ThreadController@userThread')->name('thread.history');
+
+        Route::get('{thread_id}/delete', 'ThreadController@destroy')->name('profile.delete');
+
+        Route::get('{thread_id}/close', 'ThreadController@close')->name('profile.close');
     });
 });
+

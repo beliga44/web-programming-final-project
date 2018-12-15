@@ -81,3 +81,12 @@ ul.pagination > li {
 .thread-status-text {
     margin-left: 1.3%;
 }
+
+.history-list-padding {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.history-action-display {
+    display: flex;
+}

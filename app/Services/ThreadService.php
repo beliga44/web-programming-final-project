@@ -17,14 +17,33 @@ class ThreadService
 
     }
 
-    public function findThreadById($id) {
-        return Thread::find($id);
+    public function findThreadByPosterId($id) {
+        return Thread::with('category', 'poster')->where('poster_id', $id)->paginate(5);
     }
 
-    public function make(array $data, $user) {
-        $data['poster_id'] = $user->id;
+    public function findThreadById($id) {
 
-        return Thread::create($data);
+    }
+
+    public function save(array $data, $user) {
+        $data['poster_id'] = $user->id;
+        if($data['mode'] == 'update') {
+            return Thread::find($data['thread_id'])->update($data);
+        }else{
+            return Thread::create($data);
+        }
+    }
+
+    public function destroy($id) {
+        Thread::destroy($id);
+    }
+
+    public function close($id) {
+        $thread = Thread::find($id);
+
+        $thread->is_closed = 1;
+
+        $thread->save();
     }
 
 }
