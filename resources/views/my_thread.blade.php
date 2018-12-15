@@ -16,7 +16,7 @@
                                 <i class="edit icon"></i>
                                 Edit
                             </a>
-                            <a class="ui tiny red labeled icon button" href="{{ route('thread.history', ['thread_id' => $thread->id]) }}">
+                            <a class="ui tiny red labeled icon button" href="{{ route('thread.close', ['thread_id' => $thread->id]) }}">
                                 <i class="close icon"></i>
                                 Close
                             </a>

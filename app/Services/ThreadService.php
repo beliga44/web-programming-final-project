@@ -40,9 +40,7 @@ class ThreadService
 
     public function close($id) {
         $thread = Thread::find($id);
-
         $thread->is_closed = 1;
-
         $thread->save();
     }
 

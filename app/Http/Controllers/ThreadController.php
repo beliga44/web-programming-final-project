@@ -9,6 +9,8 @@ use App\Services\ThreadService;
 use App\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class ThreadController extends Controller
 {
@@ -30,7 +32,7 @@ class ThreadController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create() {
         $categories = $this->categoryService->all();
@@ -43,7 +45,7 @@ class ThreadController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $thread_id
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit($thread_id) {
         $categories = $this->categoryService->all();
@@ -56,7 +58,7 @@ class ThreadController extends Controller
      * Save the resource in storage.
      *
      * @param  App\Http\Requests\StoreThread  $request
-     * @return \Illuminate\Http\Response
+     * @return Redirect
      */
     public function save(StoreThread $request) {
         $this->threadService->save($request->all(), Auth::user());
@@ -71,12 +73,18 @@ class ThreadController extends Controller
     public function destroy($id) {
         $this->threadService->destroy($id);
 
-        return redirect()->route('profile.thread');
+        return redirect()->route('thread.history');
     }
 
-    public function close($id) {
-        $this->threadService->close($id);
+    /**
+     * Close the specified thread in storage.
+     *
+     * @param  int $thread_id
+     * @return Redirect
+     */
+    public function close($thread_id) {
+        $this->threadService->close($thread_id);
 
-        return redirect()->route('profile.thread');
+        return redirect()->route('thread.history');
     }
 }

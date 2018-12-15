@@ -53,9 +53,9 @@ Route::prefix('thread')->group(function () {
 
         Route::get('history', 'ThreadController@userThread')->name('thread.history');
 
-        Route::get('{thread_id}/delete', 'ThreadController@destroy')->name('profile.delete');
+        Route::get('{thread_id}/delete', 'ThreadController@destroy')->name('thread.delete');
 
-        Route::get('{thread_id}/close', 'ThreadController@close')->name('profile.close');
+        Route::get('{thread_id}/close', 'ThreadController@close')->name('thread.close');
     });
 });
 
