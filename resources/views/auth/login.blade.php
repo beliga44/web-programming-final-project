@@ -19,12 +19,22 @@
                             <i class="user icon"></i>
                             <input type="text" name="email" placeholder="Email Address">
                         </div>
+                        @if ($errors->has('email'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('email') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="lock icon"></i>
                             <input type="password" name="password" placeholder="Password">
                         </div>
+                        @if ($errors->has('password'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('password') }}
+                            </div>
+                        @endif
                     </div>
                     <div class="field">
                         <div class="ui checkbox">

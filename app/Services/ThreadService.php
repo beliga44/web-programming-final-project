@@ -14,11 +14,26 @@ use App\Thread;
 class ThreadService
 {
     public function all() {
+        return Thread::with('poster', 'category');
+    }
 
+    public function allWithPaginate($limit) {
+        return Thread::with('poster', 'category')
+            ->paginate($limit);
+    }
+
+    public function paginate($threads, $limit) {
+        return $threads->paginate($limit);
+    }
+
+    public function orderBy($threads, $criteria) {
+        return $threads->orderBy('created_at', $criteria);
     }
 
     public function findThreadByPosterId($id) {
-        return Thread::with('category', 'poster')->where('poster_id', $id)->paginate(5);
+        return Thread::with('category', 'poster')
+            ->where('poster_id', $id)
+            ->paginate(5);
     }
 
     public function findThreadById($id) {

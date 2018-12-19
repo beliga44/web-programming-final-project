@@ -23,10 +23,14 @@ class CategoryService
     }
 
     public function make(array $data) {
-        return Thread::create($data);
+        return Category::create($data);
     }
 
-    public function update(array $data, $id) {
-        return Thread::find($id)->update($data);
+    public function update(array $data, $category_id) {
+        return Category::find($category_id)->update($data);
+    }
+
+    public function destroy($category_id) {
+        Category::destroy($category_id);
     }
 }

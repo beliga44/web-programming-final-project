@@ -13,22 +13,35 @@ class CategoriesTableSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'Hardware'
+                'name' => 'Hardware',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name' => 'Software'
+                'name' => 'Software',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name' => 'Business'
+                'name' => 'Business',
+                'created_at' => now(),
+                'updated_at' => now(),
+
             ],
             [
-                'name' => 'Politic'
+                'name' => 'Politic',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name' => 'Book'
+                'name' => 'Book',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'name' => 'Cooking'
+                'name' => 'Cooking',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ];
 

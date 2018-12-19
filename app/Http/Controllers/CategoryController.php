@@ -21,13 +21,31 @@ class CategoryController extends Controller
         return back();
     }
 
-    public function edit() {
+    public function edit($category_id) {
+        $category = $this->categoryService->getCategoryById($category_id);
 
+        return view('category.edit', ['category' => $category]);
     }
 
     public function update(StoreCategory $request, $category_id) {
         $this->categoryService->update($request->all(), $category_id);
 
+        if ($request['is_master'] == true) {
+            return redirect()->route('category.master');
+        }
+
         return back();
+    }
+
+    public function destroy($category_id) {
+        $this->categoryService->destroy($category_id);
+
+        return back();
+    }
+
+    public function showMaster() {
+        $categories = $this->categoryService->all();
+
+        return view('category.master', ['categories' => $categories]);
     }
 }

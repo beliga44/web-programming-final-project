@@ -21,7 +21,7 @@
                                 Close
                             </a>
                         @else
-                            <p>No Actions</p>
+                            <p>Closed thread</p>
                         @endif
                         </div>
                     </div>

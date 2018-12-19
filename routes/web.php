@@ -56,6 +56,22 @@ Route::prefix('thread')->group(function () {
         Route::get('{thread_id}/delete', 'ThreadController@destroy')->name('thread.delete');
 
         Route::get('{thread_id}/close', 'ThreadController@close')->name('thread.close');
+
+        Route::get('master', 'ThreadController@showMaster')->name('thread.master');
+    });
+});
+
+Route::prefix('category')->group(function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::post('/', 'CategoryController@store')->name('category.store');
+
+        Route::get('{category_id}/delete', 'CategoryController@destroy')->name('category.delete');
+
+        Route::post('{category_id}/update', 'CategoryController@update')->name('category.update');
+
+        Route::get('{category_id}/update', 'CategoryController@edit')->name('category.edit');
+
+        Route::get('master', 'CategoryController@showMaster')->name('category.master');
     });
 });
 

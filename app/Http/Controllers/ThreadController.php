@@ -23,6 +23,11 @@ class ThreadController extends Controller
         $this->categoryService = $categoryService;
     }
 
+    /**
+     * Show the view for user's thread history.
+     *
+     * @return View
+     */
     public function userThread() {
         $threads = $this->threadService->findThreadByPosterId(Auth::id());
 
@@ -70,10 +75,16 @@ class ThreadController extends Controller
         return redirect()->route('home');
     }
 
-    public function destroy($id) {
-        $this->threadService->destroy($id);
+    /**
+     * Delete the specified thread in storage.
+     *
+     * @param  int $thread_id
+     * @return Redirect
+     */
+    public function destroy($thread_id) {
+        $this->threadService->destroy($thread_id);
 
-        return redirect()->route('thread.history');
+        return back();
     }
 
     /**
@@ -85,6 +96,17 @@ class ThreadController extends Controller
     public function close($thread_id) {
         $this->threadService->close($thread_id);
 
-        return redirect()->route('thread.history');
+        return back();
+    }
+
+    /**
+     * Show thread view master.
+     *
+     * @return View
+     */
+    public function showMaster() {
+        $threads = $this->threadService->allWithPaginate(10);
+
+        return view('thread.master', ['threads' => $threads]);
     }
 }
