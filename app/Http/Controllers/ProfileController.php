@@ -11,8 +11,6 @@ use App\Http\Requests\ChangePassword;
 class ProfileController extends Controller
 {
 
-    private $updateProfileUserService;
-    private $updateUserPasswordService;
     private $userService;
 
     /**

@@ -30,6 +30,23 @@ class User extends Authenticatable
     ];
 
     /**
+     * The attributes that are appends to model.
+     *
+     * @var array
+     */
+    public $appends = [
+        'count_message', 'count_posted_thread'
+    ];
+
+    public function getCountMessageAttribute() {
+        return Message::where('receiver_id', $this->attributes['id'])->count();
+    }
+
+    public function getCountPostedThreadAttribute() {
+        return Thread::where('poster_id', $this->attributes['id'])->count();
+    }
+
+    /**
      * Get the messages for every user.
      */
     public function messages() {

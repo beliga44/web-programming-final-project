@@ -33,13 +33,13 @@
 	      			</div>
 	      			<div class="row justify aligned">
 	      				<div class="column justify aligned">
-							<a class="ui image label popup-icon" data-content="Post">
+							<a class="ui image green label popup-icon" data-content="Post">
 								<i class="file icon"></i>
-								4
+								{{ $user->count_posted_thread }}
 							</a>
-	      					<a class="ui image label popup-icon" data-content="Inbox">
+	      					<a class="ui image blue label popup-icon" data-content="Inbox">
 								<i class="mail icon"></i>
-								1
+								{{ $user->count_message }}
 							</a>
 						@can('profile-popularity', $user)
 							<a class="ui green image label popup-icon" data-content="Positive popularity" href="{{ route('profile.popularity', ['id' => $user->id, 'popularity' => 'positive']) }}">
