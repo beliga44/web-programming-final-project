@@ -25,6 +25,10 @@ class UserService
         return User::find($id);
     }
 
+    public function allWithPaginate($limit) {
+        return User::paginate($limit);
+    }
+
     /**
      * Increase popularity by given state.
      *
@@ -64,6 +68,47 @@ class UserService
         ]);
     }
 
+    public function save(array $data) {
+        if ($data['mode'] == 'Update') {
+            $imageName = null;
+
+            if ($this->hasUploadNewFile($data)) {
+                $imageName = $this->getImageName($this->getExtension($data['profile_picture']));
+                $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
+            } else {
+                $imageName = User::find($data['user_id'])->profile_picture;
+            }
+
+            return User::find($data['user_id'])
+                ->update([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => bcrypt($data['password']),
+                    'address' => $data['address'],
+                    'profile_picture' => $imageName,
+                    'phone_number' => $data['phone_number'],
+                    'dob' => $data['dob'],
+                    'gender' => $data['gender'],
+                    'is_admin' => $data['is_admin']
+                ]);
+        } else {
+            $imageName = $this->getImageName($this->getExtension($data['profile_picture']));
+            $this->moveFile($data['profile_picture'], public_path('profile_picture'), $imageName);
+
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'address' => $data['address'],
+                'profile_picture' => $imageName,
+                'phone_number' => $data['phone_number'],
+                'dob' => $data['dob'],
+                'gender' => $data['gender'],
+                'is_admin' => $data['is_admin']
+            ]);
+        }
+    }
+
     /**
      * Update profile for specified user
      *
@@ -91,6 +136,10 @@ class UserService
             'profile_picture' => $imageName,
         ]);
 
+    }
+
+    public function destroy($id) {
+        User::destroy($id);
     }
 
 }

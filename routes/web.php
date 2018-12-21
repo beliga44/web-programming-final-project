@@ -75,3 +75,18 @@ Route::prefix('category')->group(function () {
     });
 });
 
+Route::prefix('user')->group(function () {
+    Route::middleware(['auth'])->group(function () {
+        Route::get('insert', 'UserController@create')->name('user.create');
+
+        Route::post('insert', 'UserController@save')->name('user.save');
+
+        Route::get('{user_id}/delete', 'UserController@destroy')->name('user.delete');
+
+        Route::post('{user_id}/update', 'UserController@update')->name('user.update');
+
+        Route::get('{user_id}/update', 'UserController@edit')->name('user.edit');
+
+        Route::get('master', 'UserController@showMaster')->name('user.master');
+    });
+});

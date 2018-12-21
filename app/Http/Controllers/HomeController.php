@@ -6,6 +6,7 @@ use App\Services\ThreadService;
 use App\Thread;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
@@ -29,10 +30,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $keyword = Input::get('keyword');
         $service = $this->threadService;
-        $users = User::all();
-        $threads = $service->paginate($service->orderBy($service->all(), 'desc'), 5);
+        $threads = null;
+//        if (!empty($keyword)) {
+//            $threads = $service->paginate($service->search($keyword), 5);
+//        } else {
+//            $threads = $service->paginate($service->orderByCreatedAt($service->all(), 'desc'), 5);
+//        }
+        $threads = $service->paginate($service->search($keyword), 5);
 
-        return view('home', ['users' => $users, 'threads' => $threads]);
+        return view('home', ['threads' => $threads]);
     }
 }

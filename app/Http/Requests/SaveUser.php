@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\EndsWith;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfile extends FormRequest
+class SaveUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,13 @@ class UpdateProfile extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'is_admin' => 'required',
 //            'email' => 'required|string|email|max:255|unique:users', -> kalau emailnya gak diupdate = bentrok
+            'password' => 'required|string|min:6|confirmed',
             'phone_number' => 'required|numeric',
             'address' => ['required', new EndsWith('Street')],
             'profile_picture' => 'image|mimes:jpeg,png,jpg', // -> required dihilangkan karena jika tidak mau update = bentrok
             'dob' => 'required|before:12 years ago',
-
         ];
     }
 }

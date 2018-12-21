@@ -32,6 +32,11 @@ class Thread extends Model
         "formatted_date"
     ];
 
+    /**
+     * Get the Formatted date for the Thread.
+     *
+     * @return String
+     */
     public function getFormattedDateAttribute(){
         return Carbon::parse($this['updated_at'])->format("F d Y h:i:s");
     }

@@ -26,7 +26,7 @@ class ThreadService
         return $threads->paginate($limit);
     }
 
-    public function orderBy($threads, $criteria) {
+    public function orderByCreatedAt($threads, $criteria) {
         return $threads->orderBy('created_at', $criteria);
     }
 
@@ -40,13 +40,21 @@ class ThreadService
 
     }
 
+    public function search($keyword) {
+        return Thread::with('category', 'poster')
+            ->where('name', 'like', '%'.$keyword.'%')
+            ->orWhereHas('category', function ($category) use ($keyword) {
+                $category->where('name', 'like', '%'.$keyword.'%');
+            });
+    }
+
     public function save(array $data, $user) {
         $data['poster_id'] = $user->id;
+
         if($data['mode'] == 'update') {
             return Thread::find($data['thread_id'])->update($data);
-        }else{
-            return Thread::create($data);
         }
+        return Thread::create($data);
     }
 
     public function destroy($id) {

@@ -1,11 +1,6 @@
 @extends('layouts.app')
 @section('content')
     <div class="ui container form-list-padding">
-        {{--@foreach($users as $user)--}}
-            {{--<div>--}}
-                {{--<a href="{{ route('profile.show', ['id' => $user->id]) }}">{{ $user->name }}</a>--}}
-            {{--</div>--}}
-        {{--@endforeach--}}
         @can('create', App\Thread::class)
             <a class="circular ui primary labeled icon button" href="{{ route('thread.create') }}">
                 <i class="add icon"></i>
