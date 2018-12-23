@@ -8,10 +8,12 @@
             </a>
         @endcan
         @foreach($threads as $thread)
-            <div class="ui segments">
+            <div class="ui segments" >
                 <div class="ui segment">
                     <div>
-                        <span class="thread-name-text">{{ $thread->name }}</span>
+                        <span class="thread-name-text">
+                            <a href="{{ route('thread.detail', ['thread_id' => $thread->id]) }}">{{ $thread->name }}</a>
+                        </span>
                         <a class="ui {{$thread->is_closed == true ? 'red' : 'green'}} label" style="margin-left: 1.3%">
                             {{$thread->is_closed == true ? 'Closed' : 'Open'}}
                         </a>

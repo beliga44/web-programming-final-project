@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\StoreThread;
 use App\Services\CategoryService;
+use App\Services\CommentService;
 use App\Services\ThreadService;
 use App\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -16,11 +18,15 @@ class ThreadController extends Controller
 {
     private $threadService;
     private $categoryService;
+    private $commentService;
 
-    public function __construct(ThreadService $threadService, CategoryService $categoryService)
+    public function __construct(ThreadService $threadService,
+                                CategoryService $categoryService,
+                                CommentService $commentService)
     {
         $this->threadService = $threadService;
         $this->categoryService = $categoryService;
+        $this->commentService = $commentService;
     }
 
     /**
@@ -109,4 +115,15 @@ class ThreadController extends Controller
 
         return view('thread.master', ['threads' => $threads]);
     }
+
+    public function detail($thread_id) {
+        $keyword = Input::get('keyword');
+        $comments = $this->commentService->paginate($this->commentService->search($keyword, $thread_id), 5);
+        $thread = $this->threadService->findThreadById($thread_id);
+
+        $is_empty = empty($keyword) && empty(array_filter($comments->all())) ? true : false;
+
+        return view('thread.detail', ['comments' => $comments, 'thread' => $thread, 'is_empty' => $is_empty]);
+    }
+
 }

@@ -32,12 +32,6 @@ class HomeController extends Controller
     {
         $keyword = Input::get('keyword');
         $service = $this->threadService;
-        $threads = null;
-//        if (!empty($keyword)) {
-//            $threads = $service->paginate($service->search($keyword), 5);
-//        } else {
-//            $threads = $service->paginate($service->orderByCreatedAt($service->all(), 'desc'), 5);
-//        }
         $threads = $service->paginate($service->search($keyword), 5);
 
         return view('home', ['threads' => $threads]);

@@ -58,7 +58,19 @@ Route::prefix('thread')->group(function () {
         Route::get('{thread_id}/close', 'ThreadController@close')->name('thread.close');
 
         Route::get('master', 'ThreadController@showMaster')->name('thread.master');
+
+        Route::get('{thread_id}/detail', 'ThreadController@detail')->name('thread.detail');
     });
+});
+
+Route::prefix('comment')->group(function () {
+    Route::post('/', 'CommentController@store')->name('comment.store');
+
+    Route::get('{comment_id}/edit', 'CommentController@edit')->name('comment.edit');
+
+    Route::post('{comment_id}/update', 'CommentController@update')->name('comment.update');
+
+    Route::get('{comment_id}/delete', 'CommentController@destroy')->name('comment.delete');
 });
 
 Route::prefix('category')->group(function () {

@@ -37,7 +37,8 @@ class ThreadService
     }
 
     public function findThreadById($id) {
-
+        return Thread::with('category', 'poster')
+            ->find($id);
     }
 
     public function search($keyword) {
@@ -54,6 +55,7 @@ class ThreadService
         if($data['mode'] == 'update') {
             return Thread::find($data['thread_id'])->update($data);
         }
+
         return Thread::create($data);
     }
 
