@@ -33,6 +33,7 @@
 	      			</div>
 	      			<div class="row justify aligned">
 	      				<div class="column justify aligned">
+						@cannot('profile-popularity', $user)
 							<a class="ui image green label popup-icon" data-content="Post">
 								<i class="file icon"></i>
 								{{ $user->count_posted_thread }}
@@ -41,6 +42,7 @@
 								<i class="mail icon"></i>
 								{{ $user->count_message }}
 							</a>
+						@endcannot
 						@can('profile-popularity', $user)
 							<a class="ui green image label popup-icon" data-content="Positive popularity" href="{{ route('profile.popularity', ['id' => $user->id, 'popularity' => 'positive']) }}">
 							    <i class="plus icon"></i>

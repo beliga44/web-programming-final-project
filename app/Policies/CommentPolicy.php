@@ -67,4 +67,5 @@ class CommentPolicy
     public function viewAction(User $user, Comment $comment) {
         return $user->id === $comment->user_id;
     }
+
 }

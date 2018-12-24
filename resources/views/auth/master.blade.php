@@ -22,7 +22,9 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-                <td data-label="Photo">{{ $user->name }}</td>
+                <td data-label="Photo">
+                    <img class="ui mini circular image" src="{{ asset('/profile_picture/' . $user->profile_picture) }}">
+                </td>
                 <td data-label="Name">{{ $user->name }}</td>
                 <td data-label="Role">{{ $user->is_admin == true ? 'Admin' : 'Member' }}</td>
                 <td data-label="Email">{{ $user->email }}</td>

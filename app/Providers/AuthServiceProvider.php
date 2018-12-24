@@ -33,5 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('profile-edit', 'App\Policies\ProfilePolicy@edit');
         Gate::define('profile-popularity', 'App\Policies\ProfilePolicy@popularity');
         Gate::define('profile-inbox', 'App\Policies\ProfilePolicy@message');
+        Gate::define('manage-master', function($user) {
+            return $user->is_admin == 1 ? true : false;
+        });
     }
 }

@@ -41,7 +41,6 @@ class CommentService
                     $thread->where('name', 'like', '%'.$keyword.'%');
                 });;
             });
-
     }
 
     public function paginate($threads, $limit) {

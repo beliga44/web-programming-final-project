@@ -34,7 +34,9 @@
                 @foreach($comments as $comment)
                 <div class="ui segments">
                     <div class="ui secondary segment">
-                        <p>{{ $comment->user->name }}</p>
+                        <p>
+                            <a href="{{ route('profile.show', ['user_id' => $comment->user->id]) }}">{{ $comment->user->name }}</a>
+                        </p>
                         <p>{{ $comment->user->is_admin == 0 ? 'Member' : 'Admin' }}</p>
                         <p>{{ $comment->formatted_date }}</p>
                         @can('viewAction', $comment)
@@ -60,26 +62,28 @@
             @endif
         </div>
     </div>
-    <div class="ui segments">
-        <div class="ui secondary segment">
-            <p>Post New Comment</p>
+    @can('viewFormComment', $thread)
+        <div class="ui segments">
+            <div class="ui secondary segment">
+                <p>Post New Comment</p>
+            </div>
+            <div class="ui segment">
+                <form class="ui form" action="{{ route('comment.store') }}" method="POST">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                    <input type="hidden" name="thread_id" value="{{ $thread->id }}">
+                    <div class="field">
+                        <label>Content</label>
+                        <textarea name="content" id="" cols="30" rows="5"></textarea>
+                        @if ($errors->has('content'))
+                            <div class="ui pointing red basic label">
+                                {{ $errors->first('content') }}
+                            </div>
+                        @endif
+                    </div>
+                    <button class="ui primary button" type="submit">Comment</button>
+                </form>
+            </div>
         </div>
-        <div class="ui segment">
-            <form class="ui form" action="{{ route('comment.store') }}" method="POST">
-                {{ csrf_field() }}
-                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
-                <input type="hidden" name="thread_id" value="{{ $thread->id }}">
-                <div class="field">
-                    <label>Content</label>
-                    <textarea name="content" id="" cols="30" rows="5"></textarea>
-                    @if ($errors->has('content'))
-                        <div class="ui pointing red basic label">
-                            {{ $errors->first('content') }}
-                        </div>
-                    @endif
-                </div>
-                <button class="ui primary button" type="submit">Comment</button>
-            </form>
-        </div>
-    </div>
+    @endcan
 @endsection

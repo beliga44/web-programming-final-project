@@ -37,6 +37,11 @@
                             <i class="dropdown icon"></i>
                             <div class="menu">
                                 <a class="item" href="{{ route('profile.show', ['id' => Auth::user()->id]) }}">Profile</a>
+                                @can('manage-master')
+                                <a class="item" href="{{ route('user.master') }}">Manage Users</a>
+                                <a class="item" href="{{ route('thread.master') }}">Manage Threads</a>
+                                <a class="item" href="{{ route('category.master') }}">Manage Categories</a>
+                                @endcan
                                 <a class="item" href="{{ route('thread.history') }}">My Thread</a>
                                 <a class="item" href="{{ route('logout') }}">Logout</a>
                             </div>

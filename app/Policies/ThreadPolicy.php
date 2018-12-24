@@ -56,4 +56,12 @@ class ThreadPolicy
     {
         //
     }
+
+
+    public function viewFormComment(User $user, Thread $thread) {
+        if ($thread->is_closed == 1)
+            return false;
+
+        return true;
+    }
 }
