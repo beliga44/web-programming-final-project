@@ -2,24 +2,7 @@
 
 @section('content')
 	<div class="ui grid">
-		<div class="four wide column">
-			<div class="ui vertical fluid tabular menu">
-				<a class="item" href="{{ route('profile.show', ['id' => $user->id]) }}">
-					Bio
-				</a>
-				@can('profile-edit', $user)
-				<a class="active item" href="{{ route('profile.show.update', ['id' => $user->id]) }}">
-					Edit Profile
-				</a>
-				<a class="item" href="{{ route('profile.show.password', ['id' => $user->id]) }}">
-					Change Password
-				</a>
-				<a class="item" href="{{ route('inbox.show', ['id' => $user->id]) }}">
-					Inbox
-				</a>
-				@endcan
-			</div>
-		</div>
+		@include('profile.sidebar')
 	  	<div class="twelve wide stretched column">
 	    	<div class="ui segment">
 	    		<form class="ui form" action="{{ url('profile/' . Auth::user()->id . '/update') }}" method="POST" enctype="multipart/form-data">
