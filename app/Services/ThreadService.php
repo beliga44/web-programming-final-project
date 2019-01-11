@@ -46,7 +46,8 @@ class ThreadService
             ->where('name', 'like', '%'.$keyword.'%')
             ->orWhereHas('category', function ($category) use ($keyword) {
                 $category->where('name', 'like', '%'.$keyword.'%');
-            });
+            })
+            ->orderBy('created_at', 'desc');
     }
 
     public function save(array $data, $user) {
